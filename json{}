@@ -1,0 +1,44 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Start Backend Server",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceFolder}/server.js",
+            "env": {
+                "NODE_ENV": "development",
+                "PORT": "5000",
+                "MONGODB_URI": "mongodb://localhost:27017/financial-transparency",
+                "JWT_SECRET": "your-super-secret-jwt-key-change-this-in-production",
+                "JWT_EXPIRE": "7d",
+                "CLIENT_URL": "http://localhost:3000"
+            },
+            "console": "integratedTerminal",
+            "restart": true,
+            "runtimeExecutable": "node"
+        },
+        {
+            "name": "Start Frontend Server",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceFolder}/client/node_modules/.bin/react-scripts",
+            "args": ["start"],
+            "cwd": "${workspaceFolder}/client",
+            "env": {
+                "BROWSER": "none",
+                "PORT": "3000"
+            },
+            "console": "integratedTerminal",
+            "restart": true,
+            "runtimeExecutable": "node"
+        }
+    ],
+    "compounds": [
+        {
+            "name": "Start Full Application",
+            "configurations": ["Start Backend Server", "Start Frontend Server"],
+            "stopAll": true
+        }
+    ]
+}
